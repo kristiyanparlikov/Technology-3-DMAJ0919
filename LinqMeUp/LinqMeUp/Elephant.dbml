@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Corona" Class="ElephantDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=l2.kaje.ucnit20.eu;Initial Catalog=Corona;Persist Security Info=True;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="CoronaConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.theStats" Member="theStats">
+    <Type Name="theStat">
+      <Column Name="countrycode" Type="System.String" DbType="Char(4) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="date" Type="System.DateTime" DbType="SmallDateTime NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="cases" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="deaths" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="recovered" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>
