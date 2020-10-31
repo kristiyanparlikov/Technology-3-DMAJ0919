@@ -32,7 +32,7 @@ namespace TransactionScope
             InitializeComponent();
         }
 
-        private void ConnectionTestGeneral(SqlConnectionStringBuilder connString)
+        private void ConnectionTestGeneral(SqlConnectionStringBuilder connString, string database)
         {
             connString.InitialCatalog = "master";
             connString.IntegratedSecurity = false; /* true means windows authentication */
@@ -41,7 +41,7 @@ namespace TransactionScope
             {
                 connDB.Open();
                 connDB.Close();
-                textBoxResult.Text = "SQL Connection OK";
+                textBoxResult.Text = database + "\nSQL Connection OK";
                 textBoxResult.Update();
             }
             catch (SqlException ex)
@@ -59,7 +59,7 @@ namespace TransactionScope
             connString.UserID = textBoxUserA.Text;
             connString.Password = textBoxPasswordA.Text;
             connString.DataSource = textBoxUrlA.Text;
-            ConnectionTestGeneral(connString);
+            ConnectionTestGeneral(connString, "Database-A");
         }
 
         private void buttonConB_Click(object sender, EventArgs e)
@@ -70,7 +70,7 @@ namespace TransactionScope
             connString.UserID = textBoxUserB.Text;
             connString.Password = textBoxPasswordB.Text;
             connString.DataSource = textBoxUrlB.Text;
-            ConnectionTestGeneral(connString);
+            ConnectionTestGeneral(connString, "Database-B");
         }
 
         private void PrepareTestGeneral(SqlConnectionStringBuilder connString, string databaseName)
@@ -165,7 +165,7 @@ namespace TransactionScope
             connString.UserID = textBoxUserA.Text;
             connString.Password = textBoxPasswordA.Text;
             connString.DataSource = textBoxUrlA.Text;
-            // Withdraw 100 fromm Copenhagen (1)
+            // Withdraw 100 from Copenhagen (1)
             using (SqlConnection connDB = new SqlConnection(connString.ConnectionString))
             {
                 try
@@ -201,7 +201,7 @@ namespace TransactionScope
             connString.UserID = textBoxUserB.Text;
             connString.Password = textBoxPasswordB.Text;
             connString.DataSource = textBoxUrlB.Text;
-            // Withdraw 100 fromm Copenhagen (1)
+            // Deposit 100 to Aalborg (1)
             using (SqlConnection connDB = new SqlConnection(connString.ConnectionString))
             {
                 try
@@ -224,7 +224,7 @@ namespace TransactionScope
                 }
                 catch (SqlException ex)
                 {
-                    Console.WriteLine("Withdraw 100 from Aalborg(1)\n" + ex.ToString());
+                    Console.WriteLine("Deposit 100 to Aalborg(1)\n" + ex.ToString());
                     connDB.Close();
                     return -1;
                 }
@@ -287,7 +287,7 @@ namespace TransactionScope
             connString.UserID = textBoxUserB.Text;
             connString.Password = textBoxPasswordB.Text;
             connString.DataSource = textBoxUrlB.Text;
-            // Withdraw 100 fromm Copenhagen (1)
+            // Withdraw 100 fromm Aalborg (1)
             using (SqlConnection connDB = new SqlConnection(connString.ConnectionString))
             {
                 try
