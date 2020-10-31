@@ -1,0 +1,18 @@
+﻿
+@if (Request.IsAuthenticated)
+{
+    <ul class="nav navbar-nav navbar-right" style="color: yellow">
+        Hello @User.Identity.Name :-)
+        <li>
+            @Html.ActionLink("Click here to logout", "SignOut", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", style = "color: red" })
+        </li>
+    </ul>
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            @Html.ActionLink("Click here to login", "SignIn", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", style = "color: red" })
+        </li>
+    </ul>
+}
