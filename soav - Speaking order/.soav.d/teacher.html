@@ -1,0 +1,62 @@
+<html>
+	<head>
+		<title>Speaking order</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+		<script>
+			$(document).ready(function(){
+				$(".btn").click(function(event) { $(this).blur(); });
+				$("#queueMe").click(function(){
+					$.post("soav.cgi?load=queueme"+";name=MYNAME;");
+				});
+				$("#queuePop").click(function(){
+					$.post("soav.cgi?load=queuepop;");
+				});
+				$("#queueClear").click(function(){
+					$.post("soav.cgi?load=queueclear;");
+				});
+				$("#queueTest").click(function(){
+					$.post("soav.cgi?load=queuetest;");
+				});
+				setInterval(function(){
+					$("#sospeaker").load("soav.cgi?load=qstatus"+"; #sospeaker");
+					$("#soqueue").load("soav.cgi?load=qstatus"+"; #soqueue");
+				}, 2000);
+			});
+		</script>
+	</head>
+	<body>
+		<div id="mainPage">
+			<div class="container-fluid">
+				<h1>Speaking order</h1>
+				<div class="row">
+					<div class="col-sm-12" style="background-color:lavender;">
+						<div class="form-group">
+							<br><button type="button" class="btn btn-primary" id="queueMe">Queue Me</button>
+							<button type="button" class="btn btn-primary" id="queuePop">Next Speaker</button>
+							<button type="button" class="btn btn-primary" id="queueClear">Clear Queue</button>
+							<button type="button" class="btn btn-primary" id="queueTest">Test</button>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12" style="background-color:lightgreen;">
+						<label><strong>Speaking:</strong></label>
+						<div id="sospeaker"></div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12" style="background-color:lavenderblush;">
+						<label><strong>Queue:</strong></label>
+						<div id="soqueue"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+
