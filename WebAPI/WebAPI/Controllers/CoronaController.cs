@@ -31,8 +31,15 @@ namespace WebAPI.Controllers
         }
 
         // POST: api/Corona
-        public void Post([FromBody] string value)
+        public HttpResponseMessage Post(Datum newDatum)
         {
+            string query = "INSERT INTO theStats (countrycode, date, cases, deaths, recovered)";
+            query += " VALUES ('{0}', '{1}', '{2}', '{3}', '{4}')";
+            CoronaOperations coop = new CoronaOperations();
+            if (coop.PutTheRecord(string.Format(query, newDatum.countrycode, newDatum.date, newDatum.cases, newDatum.deaths, newDatum.recovered))){
+                return new HttpResponseMessage(HttpStatusCode.Created);
+            } else
+            return new HttpResponseMessage(HttpStatusCode.Conflict);
         }
 
         // PUT: api/Corona/5

@@ -8,6 +8,32 @@ namespace WebAPI.Models
 {
     public class CoronaOperations
     {
+        public Boolean PutTheRecord(string sqlQuery)
+        {
+            SqlConnectionStringBuilder connString = new SqlConnectionStringBuilder();
+            connString.UserID = "sa";
+            connString.Password = "Technology3";
+            connString.DataSource = "l2.kaje.ucnit20.eu";
+            connString.IntegratedSecurity = false; // if true then windows authentication
+            connString.InitialCatalog = "Corona";
+            int theReply = 0;
+            using (SqlConnection connDB = new SqlConnection(connString.ConnectionString))
+            {
+                try
+                {
+                    connDB.Open();
+                    var sqlCmd = new SqlCommand(sqlQuery, connDB);
+                    theReply = sqlCmd.ExecuteNonQuery();
+                    connDB.Close();
+                    return (true);
+                }
+                catch (SqlException ex)
+                {
+                    return (false);
+                }
+
+            }
+        }
         public List<Datum> GetTheRecords(string sqlQuery)
         {
             SqlConnectionStringBuilder connString = new SqlConnectionStringBuilder();
